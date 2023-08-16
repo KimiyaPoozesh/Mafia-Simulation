@@ -8,10 +8,10 @@ public class Character : MonoBehaviour
     protected int money=0;
     protected bool isAlive=true;
     protected bool inPrison=false;
-    protected bool attacked=false;
-    protected float speed=10f;
-    private List<Transform> waypoints;
+    protected bool rubbed=false;
+    protected float speed=50f;
     public FloatingText floatingText; // Reference to the FloatingText script
+    
 
     public void UpdateMoney(int newMoney)
     {
@@ -20,15 +20,25 @@ public class Character : MonoBehaviour
         floatingText.UpdateMoneyText(money);
     }
     
+    public void Kill(Character  victim){
+         if (victim != null)
+        {
+            victim.isAlive = false;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        UpdateMoney(2500);
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // UpdateMoney(money);
     }
+
+
+
 }

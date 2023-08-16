@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Miner : Character
+public class Worker : Character
 {
     public List<Transform> waypoints;
     private float waypointStayDuration = 5f;
     private int currentWaypointIndex;
     private Transform currentWaypoint;
     private bool isMoving = false;
+
+
     private void Start()
     {
         money=500;
@@ -29,14 +31,15 @@ public class Miner : Character
         UpdateMoney(money);
         if (!isMoving)
             return;
-
         Vector3 direction = (currentWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
-         if (direction != Vector3.zero)
+
+        if (direction != Vector3.zero)
         {
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
         }
+
         if (Vector3.Distance(transform.position, currentWaypoint.position) <= 1f)
         {
             StartCoroutine(StayAtWaypoint());
