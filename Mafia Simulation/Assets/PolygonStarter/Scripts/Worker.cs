@@ -29,7 +29,8 @@ public class Worker : Character
     private void Update()
     {
         UpdateMoney(money);
-        if (!isMoving)
+        
+        if (!isMoving && !isAlive)
             return;
         Vector3 direction = (currentWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
