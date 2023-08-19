@@ -12,6 +12,7 @@ public class Miner : Character
     private void Start()
     {
         money=500;
+        isAlive =true;
         if (waypoints.Count > 0)
         {
             currentWaypointIndex = Random.Range(0, waypoints.Count);

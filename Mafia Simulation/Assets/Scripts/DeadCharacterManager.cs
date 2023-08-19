@@ -8,6 +8,7 @@ public class DeadCharacterManager : MonoBehaviour
 
     // List to store dead characters
     private List<Character> deadCharacters = new List<Character>();
+    private List<Character> criminalCharacters = new List<Character>();
 
     private void Awake()
     {
@@ -28,6 +29,17 @@ public class DeadCharacterManager : MonoBehaviour
         deadCharacters.Add(character);
     }
 
+    public void AddCriminalCharacter(Character character)
+    {
+        criminalCharacters.Add(character);
+    }
+
+    // Remove a criminal character from the list
+    public void RemoveCriminalCharacter(Character character)
+    {
+        criminalCharacters.Remove(character);
+    }
+
     // Remove a dead character from the list
     public void RemoveDeadCharacter(Character character)
     {
@@ -38,6 +50,11 @@ public class DeadCharacterManager : MonoBehaviour
     public List<Character> GetDeadCharacters()
     {
         return deadCharacters;
+    }
+
+    public List<Character> GetCriminalCharacters()
+    {
+        return criminalCharacters;
     }
 
     public bool IsCharacterDead(Character character)

@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Worker : Character
+public class Police : Character
 {
     public List<Transform> waypoints;
-    // public Buildings house;
-    private float waypointStayDuration = 5f;
+    private float waypointStayDuration = 3f;
     private int currentWaypointIndex;
+    private List<Character> criminals;
     private Transform currentWaypoint;
     private bool isMoving = false;
-    private int houseMoney=1000;
     private void Start()
     {
-        money=500;
-        // house.UpdateMoney(houseMoney);
         if (waypoints.Count > 0)
         {
             currentWaypointIndex = Random.Range(0, waypoints.Count);
@@ -27,21 +24,25 @@ public class Worker : Character
         }
     }
 
+
+
     private void Update()
     {
-        UpdateMoney(money);
-        
-        if (!isMoving && !isAlive)
+        if (!isMoving)
             return;
+        if(DeadCharacterManager.Instance.GetDeadCharacters().Count()>0){
+            foreach (Character criminal in DeadCharacterManager.Instance.GetCriminalCharacters()){
+                criminals.Add(criminal);
+                
+            }
+        }
         Vector3 direction = (currentWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
-
-        if (direction != Vector3.zero)
+         if (direction != Vector3.zero)
         {
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
         }
-
         if (Vector3.Distance(transform.position, currentWaypoint.position) <= 1f)
         {
             StartCoroutine(StayAtWaypoint());
@@ -52,12 +53,8 @@ public class Worker : Character
     {
         isMoving = false;
         yield return new WaitForSeconds(waypointStayDuration);
-
         currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
         currentWaypoint = waypoints[currentWaypointIndex];
-        money+=100;
-        Buildings house = currentWaypoint.GetComponent<Buildings>();
-        house.UpdateMoney(100,false);
         isMoving = true;
     }
 }

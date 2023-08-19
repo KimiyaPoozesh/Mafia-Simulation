@@ -24,11 +24,15 @@ public class Assasin : Character
 
 private void MoveToNextWaypoint()
 {
+    if(waypoints.Count==0){
+        return;
+    }
     currentWaypointIndex = Random.Range(0, waypoints.Count);
     Character currentWaypointCharacter = waypoints[currentWaypointIndex];
     
     if (DeadCharacterManager.Instance.IsCharacterDead(currentWaypointCharacter))
     {
+        waypoints.Remove(currentWaypointCharacter);
         MoveToNextWaypoint();
         return;
     }
