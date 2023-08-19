@@ -7,6 +7,7 @@ public class Investor : Character
     private float waypointStayDuration = 1f;
     private int _increasePercent = 2;
     private bool isInvesting = false;
+    private int minMoney = 100;
     // Start is called before the first frame update
     void Start()
     {

@@ -50,7 +50,9 @@ public class Miner : Character
 
         currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
         currentWaypoint = waypoints[currentWaypointIndex];
-        money+=100;
+        money+=50;
+        Buildings mine = currentWaypoint.GetComponent<Buildings>();
+        mine.UpdateMoney(50,true);
         isMoving = true;
     }
 }

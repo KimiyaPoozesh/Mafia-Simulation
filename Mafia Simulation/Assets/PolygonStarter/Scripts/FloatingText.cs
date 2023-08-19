@@ -11,7 +11,8 @@ public class  FloatingText : MonoBehaviour
     Transform WorldSpaceCanvas;
     public Vector3 offset;
     public TextMeshProUGUI moneyText;
-    private int money =10000; //default money
+    public bool isMine;
+    private int money =1000; //default money
 
 
     void Start(){
@@ -19,6 +20,11 @@ public class  FloatingText : MonoBehaviour
         unit=transform.parent;
         WorldSpaceCanvas = GameObject.FindObjectOfType<Canvas>().transform;
         transform.SetParent(WorldSpaceCanvas);
+        if(isMine){
+            moneyText.text = "500";
+        }
+        else
+            {moneyText.text = money.ToString();}
         
     }
 
@@ -26,10 +32,12 @@ public class  FloatingText : MonoBehaviour
     {
        transform.rotation=Quaternion.LookRotation(transform.position - mainCam.transform.position);
        transform.position=unit.position+offset;
-        moneyText.text = money.ToString();    }
+       
+            }
 
      public void UpdateMoneyText(int money)
     {
-        this.money=money;
+        moneyText.text =  money.ToString();
+
     }
 }

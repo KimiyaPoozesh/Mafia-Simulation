@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
     protected bool inPrison=false;
     protected bool rubbed=false;
     protected float speed=50f;
-    public FloatingText floatingText; // Reference to the FloatingText script
+    public FloatingText characteText; // Reference to the FloatingText script
     void Start()
     {
         isAlive=true;
@@ -19,9 +19,8 @@ public class Character : MonoBehaviour
 
     public void UpdateMoney(int newMoney)
     {
-        money = newMoney
-        ;
-        floatingText.UpdateMoneyText(money);
+        money = newMoney;
+        characteText.UpdateMoneyText(money);
     }
     
     public void Kill(Character  victim){

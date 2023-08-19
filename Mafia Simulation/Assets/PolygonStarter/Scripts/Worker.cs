@@ -5,15 +5,16 @@ using UnityEngine;
 public class Worker : Character
 {
     public List<Transform> waypoints;
+    // public Buildings house;
     private float waypointStayDuration = 5f;
     private int currentWaypointIndex;
     private Transform currentWaypoint;
     private bool isMoving = false;
-
-
+    private int houseMoney=1000;
     private void Start()
     {
         money=500;
+        // house.UpdateMoney(houseMoney);
         if (waypoints.Count > 0)
         {
             currentWaypointIndex = Random.Range(0, waypoints.Count);
@@ -55,6 +56,8 @@ public class Worker : Character
         currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
         currentWaypoint = waypoints[currentWaypointIndex];
         money+=100;
+        Buildings house = currentWaypoint.GetComponent<Buildings>();
+        house.UpdateMoney(100,false);
         isMoving = true;
     }
 }

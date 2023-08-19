@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class Buildings : MonoBehaviour
 {
-    public int money=500;
+     public FloatingText buildingText;
+    private int housemoney=1000;
+    private int mineMoney=500;
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateMoney(int reduced, bool isMine)
     {
-        
+        if(housemoney<0)
+            buildingText.UpdateMoneyText(000000000);
+        else{
+            if(!isMine)
+                {housemoney-=reduced;
+                buildingText.UpdateMoneyText(housemoney);
     }
+            else{
+                mineMoney-=reduced;
+                buildingText.UpdateMoneyText(mineMoney);
+    }
+            }
+            }
+        }
+       
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+
+   
+
