@@ -19,7 +19,8 @@ public class Assasin : Character
     private void Update()
     {
         if (inPrison || currentWaypointIndex < 0 || currentWaypointIndex >= waypoints.Count)
-            return;
+            {Debug.Log("inPrison "+inPrison);
+            return;}
     }
 
 private void MoveToNextWaypoint()
@@ -59,6 +60,7 @@ private IEnumerator MoveTowardsWaypoint(Transform targetTransform)
 
     MoveToNextWaypoint();
 }
+
 
 }
 

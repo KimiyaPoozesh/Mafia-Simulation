@@ -40,9 +40,7 @@ public class Character : MonoBehaviour
             // Iterate through the scripts and remove any that are not the Character script
             foreach (Character script in scripts)
             {
-                Debug.Log("scripttt");
-                script.enabled = false;
-                
+                script.enabled = false;       
             }
         }
     }
@@ -63,17 +61,20 @@ public class Character : MonoBehaviour
             {
             criminal.inPrison=true;
             criminal.transform.position = prisonLocation.position;
+            criminal.inSentence(criminal);
             }
     }
 
-
-    // Start is called before the first frame update
-    
-
-    // Update is called once per frame
-    void Update()
+    public void inSentence(Character criminal)
     {
-        // UpdateMoney(money);
+        StartCoroutine(ReleaseFromSentenceAfterDelay(criminal));
+    }
+
+    private IEnumerator ReleaseFromSentenceAfterDelay(Character criminal)
+    {
+        yield return new WaitForSeconds(10f); // Wait for 10 seconds
+        inPrison = false;
+        DeadCharacterManager.Instance.RemoveCriminalCharacter(criminal);
     }
 
 

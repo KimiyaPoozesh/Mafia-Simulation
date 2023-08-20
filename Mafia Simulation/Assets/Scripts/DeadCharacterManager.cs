@@ -31,6 +31,7 @@ public class DeadCharacterManager : MonoBehaviour
 
     public void AddCriminalCharacter(Character character)
     {
+
         criminalCharacters.Add(character);
     }
 
@@ -60,5 +61,10 @@ public class DeadCharacterManager : MonoBehaviour
     public bool IsCharacterDead(Character character)
     {
         return deadCharacters.Contains(character);
+    }
+
+    public bool IsCriminal(Character character)
+    {
+        return criminalCharacters.Contains(character);
     }
 }
