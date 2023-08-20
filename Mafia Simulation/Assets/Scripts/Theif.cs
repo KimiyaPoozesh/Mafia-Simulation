@@ -50,8 +50,6 @@ public class Theif : Character
             yield return null;
         }
 
-        
-            Debug.Log("before rubbery");
             Robbery(waypoints[currentWaypointIndex]);
             
         // else{

@@ -11,9 +11,10 @@ public class Police : Character
     private Transform currentWaypoint;
     private bool isMoving = false;
     private bool follow=false;
-
+    
     private void Start()
     {
+        speed=100f;
         if (waypoints.Count > 0)
         {
             currentWaypointIndex = Random.Range(0, waypoints.Count);
@@ -30,10 +31,9 @@ public class Police : Character
 
    private void Update()
 {
-    Debug.Log(follow);
+    
     if (!isMoving)
         return;
-    Debug.Log(DeadCharacterManager.Instance.GetCriminalCharacters().Count);
     if(DeadCharacterManager.Instance.GetCriminalCharacters().Count>0){
         
             foreach (Character criminal in DeadCharacterManager.Instance.GetCriminalCharacters()){
@@ -97,7 +97,7 @@ private IEnumerator MoveTowardsWaypoint(Transform targetTransform)
     {
         float fractionOfJourney = (Time.time - startTime) / journeyDuration;
         transform.position = Vector3.Lerp(initialPosition, targetPosition, fractionOfJourney);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
         yield return null;
     }
 

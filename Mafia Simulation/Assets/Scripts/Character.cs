@@ -61,21 +61,22 @@ public class Character : MonoBehaviour
             {
             criminal.inPrison=true;
             criminal.transform.position = prisonLocation.position;
-            criminal.inSentence(criminal);
+            criminal.inSentence();
             }
     }
 
-    public void inSentence(Character criminal)
+    public void inSentence()
     {
-        StartCoroutine(ReleaseFromSentenceAfterDelay(criminal));
+        
+        Assasin assasinComponent = GetComponent<Assasin>();
+        if (assasinComponent != null)
+        {
+            Debug.Log(this);
+            // Call the function from the Assasin script
+            StartCoroutine(assasinComponent.ReleaseFromPrisonAfterDelay());        }
+       
     }
 
-    private IEnumerator ReleaseFromSentenceAfterDelay(Character criminal)
-    {
-        yield return new WaitForSeconds(10f); // Wait for 10 seconds
-        inPrison = false;
-        DeadCharacterManager.Instance.RemoveCriminalCharacter(criminal);
-    }
 
 
 

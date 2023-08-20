@@ -16,23 +16,39 @@ public class Assasin : Character
         MoveToNextWaypoint();
     }
 
+
+    
+    public IEnumerator ReleaseFromPrisonAfterDelay()
+    {
+        Debug.Log("in prison with meeeee");
+        yield return new WaitForSeconds(10f); // Wait for 10 seconds
+        Debug.Log("Assassin released from prison.");
+        inPrison = false; // Set the inPrison status to false after the delay
+        MoveToNextWaypoint(); // Continue normal behavior after release
+    }
+    
+    
+    
     private void Update()
     {
-        if (inPrison || currentWaypointIndex < 0 || currentWaypointIndex >= waypoints.Count)
-            {Debug.Log("inPrison "+inPrison);
-            return;}
+        // if (inPrison || currentWaypointIndex < 0 || currentWaypointIndex >= waypoints.Count)
+        //     {
+        //     return;}
     }
 
 private void MoveToNextWaypoint()
 {
-    if(waypoints.Count==0){
+    if(waypoints.Count==0||inPrison){
+        
         return;
     }
     currentWaypointIndex = Random.Range(0, waypoints.Count);
+    
     Character currentWaypointCharacter = waypoints[currentWaypointIndex];
     
     if (DeadCharacterManager.Instance.IsCharacterDead(currentWaypointCharacter))
     {
+        Debug.Log("DEAD");
         waypoints.Remove(currentWaypointCharacter);
         MoveToNextWaypoint();
         return;
@@ -53,12 +69,13 @@ private IEnumerator MoveTowardsWaypoint(Transform targetTransform)
         yield return null;
     }
 
-    Kill(waypoints[currentWaypointIndex]);
-
-    // Wait for a short time before moving to the next waypoint
-    yield return new WaitForSeconds(1f);
-
-    MoveToNextWaypoint();
+        if (!inPrison)
+    {
+        Kill(waypoints[currentWaypointIndex]);
+        // Wait for a short time before moving to the next waypoint
+        yield return new WaitForSeconds(5f);
+        MoveToNextWaypoint();
+    }
 }
 
 
